@@ -94,8 +94,33 @@ planetData.forEach(p => {
   planets.push({ pivot, mesh, speed: p.speed, spin: p.spin });
 });
 
+// ===== 交互：鼠标拖拽环绕 =====
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+
 const animate = () => {
   requestAnimationFrame(animate);
+
+  // 太阳自转 + 轻微脉动（缩放呼吸）
+  sun.rotation.y += 0.005;
+  const t = performance.now() * 0.001;
+  sun.scale.setScalar(1 + Math.sin(t * 2) * 0.03);
+
+  // 行星公转 + 自转
+  planets.forEach(p => {
+    p.pivot.rotation.y += p.speed;
+    p.mesh.rotation.y += p.spin;
+  });
+
+  controls.update();
   renderer.render(scene, camera);
 };
 animate();
+
+// ===== 窗口 resize 适配 =====
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
