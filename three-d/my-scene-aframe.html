@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>星球宇宙展示 - A-Frame版</title>
+  <script src="libs/aframe.min.js"></script>
+</head>
+<body>
+  <a-scene background="color: #000008">
+    <!-- 环境：深空天空 -->
+    <a-sky color="#000008"></a-sky>
+
+    <!-- 环境光：微弱补光 -->
+    <a-light type="ambient" color="#444466" intensity="0.4"></a-light>
+
+    <!-- 太阳：发光球体 + 点光源（照亮行星） -->
+    <a-sphere position="0 0 0" radius="1.2" color="#ffaa33"
+              animation="property: rotation; to: 0 360 0; dur: 8000; loop: true; easing: linear">
+      <a-light type="point" color="#ffffff" intensity="1.5" distance="60"></a-light>
+    </a-sphere>
+
+    <!-- 行星系统：每个 pivot 旋转带动子行星公转 -->
+    <!-- 水星 -->
+    <a-entity animation="property: rotation; to: 0 360 0; dur: 4000; loop: true; easing: linear">
+      <a-sphere position="2.6 0 0" radius="0.25" color="#aaaaaa"
+                animation="property: rotation; to: 0 360 0; dur: 2000; loop: true; easing: linear"></a-sphere>
+    </a-entity>
+
+    <!-- 地球 -->
+    <a-entity animation="property: rotation; to: 0 360 0; dur: 8000; loop: true; easing: linear">
+      <a-sphere position="4.2 0 0" radius="0.45" color="#2e7dd8"
+                animation="property: rotation; to: 0 360 0; dur: 3000; loop: true; easing: linear"></a-sphere>
+    </a-entity>
+
+    <!-- 火星 -->
+    <a-entity animation="property: rotation; to: 0 360 0; dur: 12000; loop: true; easing: linear">
+      <a-sphere position="5.8 0 0" radius="0.35" color="#c1440e"
+                animation="property: rotation; to: 0 360 0; dur: 2500; loop: true; easing: linear"></a-sphere>
+    </a-entity>
+
+    <!-- 土星（球+环） -->
+    <a-entity animation="property: rotation; to: 0 360 0; dur: 20000; loop: true; easing: linear">
+      <a-sphere position="8 0 0" radius="0.7" color="#e8d5a3"
+                animation="property: rotation; to: 0 360 0; dur: 4000; loop: true; easing: linear">
+        <a-torus position="0 0 0" radius="1.2" radius-tubular="0.06" color="#d4b896"
+                 rotation="75 0 0"></a-torus>
+      </a-sphere>
+    </a-entity>
+
+    <!-- 星空：随机散布的小白球 -->
+    <a-sphere position="10 6 -15" radius="0.12" color="#ffffff"></a-sphere>
+    <a-sphere position="-12 4 -10" radius="0.1" color="#ffffff"></a-sphere>
+    <a-sphere position="5 -5 -18" radius="0.15" color="#ffffff"></a-sphere>
+    <a-sphere position="-8 -7 -12" radius="0.1" color="#ffffff"></a-sphere>
+    <a-sphere position="15 -3 -8" radius="0.12" color="#ffffff"></a-sphere>
+    <a-sphere position="-15 8 -20" radius="0.1" color="#ffffff"></a-sphere>
+    <a-sphere position="0 10 -22" radius="0.13" color="#ffffff"></a-sphere>
+    <a-sphere position="18 2 -16" radius="0.1" color="#ffffff"></a-sphere>
+
+    <!-- 相机初始位：稍远处俯视星系 -->
+    <a-camera position="0 6 16"></a-camera>
+  </a-scene>
+</body>
+</html>
